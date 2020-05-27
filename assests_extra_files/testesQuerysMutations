@@ -1,0 +1,93 @@
+Exemplos querys e mutations
+
+mutation {
+  createUser(name: "teste",email: "teste@email.pt"){
+    id
+    name
+    email
+  }
+}
+
+
+query{
+  allUsers{
+    id
+    name
+    email
+  }
+}
+
+//query exemplos
+
+query{
+  users (first: 15, offset: 1){
+    name
+  }
+}
+
+
+query {
+  user(id: 2){
+    name
+    email
+    createdAt
+  }
+}
+
+
+
+
+//mutations exemplos
+
+mutation{
+	createUser(input:{
+	name:"Nuno",
+	email:"nuno@gmail.com",
+	password: "123"
+})
+{
+id
+name
+email
+photo
+createdAt
+}}
+
+mutation{
+  updateUser(id:1,input:{name:"Nuno Gonçalves",email:"nuno@gmail.com",photo:"teste.png"})
+{id
+name
+email
+photo
+createdAt
+}}
+
+mutation{
+  updateUser(id:1,input:{name:"Nuno Gonçalves",email:"nuno@gmail.com",photo:"teste.png"})
+{id
+name
+email
+photo
+createdAt
+  posts{
+    id
+    title
+  }
+}}
+
+mutation {
+  deleteUser(id: 1)
+}
+
+mutation{
+  createPost(input:{
+    title: "teste post",
+    content:"teste content post",
+    photo: ""
+    author: 2
+  })
+  {
+    id
+    title
+  }
+}

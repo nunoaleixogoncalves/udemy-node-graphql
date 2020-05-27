@@ -1,0 +1,33 @@
+#!/bin/bash
+
+APP_NAME="GraphQLBlogAPI"
+GIT_WORK_TREE="/var/www/graphql-blog-api.com"
+GIT_DIR="/var/repo/graphql-blog-api.git"
+NODE_VERSION="v8.6.0"
+
+echo
+echo "--> Selecting Node version $NODE_VERSION"
+. $HOME/.nvm/nvm.sh
+nvm use $NODE_VERSION
+
+echo
+echo "--> Deleting old process..."
+pm2 delete $APP_NAME
+
+echo
+echo "--> Git checkout..."
+git --work-tree=$GIT_WORK_TREE --git-dir=$GIT_DIR checkout -f
+
+echo
+echo "--> Installing libraries..."
+cd $GIT_WORK_TREE
+npm install
+
+echo
+echo "--> Restarting server..."
+pm2 start npm --name $APP_NAME -- start
+
+echo
+echo "--> New build running!"
+echo
+
